@@ -37,7 +37,7 @@
 
 		      	$username=$_POST['username'];
 		        $email=$_POST['email'];
-		        4name=$_POST['name'];
+		        $name=$_POST['name'];
 		      	$pass1=$_POST['pass1'];
 		      	$pass2=$_POST['pass2'];
 		        $doj=date("Y-m-d");    // Today's date.
