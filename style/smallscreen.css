@@ -1,0 +1,15 @@
+.card{
+	width: 50%;
+	float: none;
+}
+
+.usercard{
+	width: 80%;
+}
+
+.bookrow .left{
+	width : 60%;
+}
+.bookrow .right{
+	width: 40%;
+}
