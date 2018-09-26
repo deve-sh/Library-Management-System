@@ -15,10 +15,10 @@ The Script is feature packed :
 	<li>Robust Login and Registration System</li>
 	<li>Secure Passwords (Double Hash)</li>
 	<li>User Control Panel</li>
+	<li>Pagination</li>
 	<li>Card ID Generation System</li>
 	<li>Wishlists for Every User</li>
 	<li>Admin Privileges with Admin Control Panel</li>
-	<li></li>
 </ul>
 
 ## Installation
