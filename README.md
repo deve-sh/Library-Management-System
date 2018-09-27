@@ -11,7 +11,8 @@ Coming Soon.
 The Script is feature packed :
 <br/><br/>
 <ul>
-	<li>Fluid Basic Design</li>
+	<li>Fluid and Responsive Design</li>
+	<li>AJAX Integration to seamlessly accomplish Tasks.</li>
 	<li>Robust Login and Registration System</li>
 	<li>Secure Passwords (Double Hash)</li>
 	<li>User Control Panel</li>
