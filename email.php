@@ -40,7 +40,7 @@ include 'loggedin.php';
             if(strcmp($oldpass,$user['email'])==0)
             {  
 
-            // If the usernames match
+            // If the emails match
 
                 $check=mysqli_num_rows(mysqli_query($dbcon,"SELECT * FROM ".$subscript."libusers WHERE email='$newpass'"));
 
