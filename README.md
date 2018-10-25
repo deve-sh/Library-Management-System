@@ -4,7 +4,7 @@ A Fully-Featured Library Management System written in PHP and SQL.
 
 ## Previews
 
-Coming Soon.
+All previews can be found : <a href='https://imgur.com/a/fI8n3Ou' target='_blank'>Here</a>.
 
 ## Features
 
