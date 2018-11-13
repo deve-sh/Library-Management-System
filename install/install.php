@@ -258,7 +258,7 @@
 				              
 				              //LATER, CONFIGURATION FILE
 
-				              $configstring="<"."?"."php\n".'$'."host='$host';\n".
+				              $configstring="<"."?"."php\nerror_reposting(0);\n\n".'$'."host='$host';\n".
                                             '$'."dbuser='$dbuser';\n".
 				                          '$'."dbpassword='$dbpassword';\n".
 				                          '$'."dbname='$dbname';\n".
