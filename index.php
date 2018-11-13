@@ -6,18 +6,6 @@
   // Redirect to installation page if the script is not yet installed.
 
   include 'head.php';
-  
-  $pageid=$_GET['pageid'];
-  
-  // But if there is no page id.
-
-  if(empty($pageid))
-  {
-  	$pageid=0;
-  }
-
-  $lowerlimit=$pageid*300;
-  $upperlimit=$lowerlimit+300;
 ?>
 <html>
 <head>
@@ -32,13 +20,40 @@
 <div class="main">
 <br>
 <?php
-    $findbooks=mysqli_query($dbcon,"SELECT * FROM ".$subscript."libbooks LIMIT ".$lowerlimit.",".$upperlimit."");   
+    $rowsperpage = 10;
+    
+    $totalpages = ceil($numrows / $rowsperpage);
+
+    
+    if (isset($_GET['currentpage']) && is_numeric($_GET['currentpage'])) {
+       
+       $currentpage = (int) $_GET['currentpage'];
+    } else {
+       
+       $currentpage = 1;
+    } 
+
+    
+    if ($currentpage > $totalpages) {
+       
+       $currentpage = $totalpages;
+    } 
+    
+    if ($currentpage < 1) {
+       
+       $currentpage = 1;
+    } 
+
+    
+    $offset = ($currentpage - 1) * $rowsperpage;
+
+    $findbooks=mysqli_query($dbcon,"SELECT * FROM ".$subscript."libbooks LIMIT $offset, $rowsperpage");   
 
     // Extract 300 books at once if present.
 
-    $noofbooks=mysqli_num_rows($findbooks);
+    $numrows=mysqli_num_rows($findbooks);
 
-    if($noofbooks==0)
+    if($numrows==0)
     {
     	echo "<div align='center'><br><br>
     	<i class='fas fa-book fa-3x' id='bigicon'></i>
@@ -78,42 +93,50 @@
         </div>";
     	}
 
-    	if($pageid>0)
-    	{
-    		$nextpage=$pageid+1;
-    		$previouspage=$pageid-1;
-    		$homepage=0;
-?>
-            <div align="center"><div>
-            	<?php
-            	    echo "<a href='index.php?pageid=".$homepage."'>Home</a>&nbsp&nbsp<a href='index.php?pageid=".$previouspage."'>Previous</a>"; 
-            	    if($noofbooks==300)   // If the no of books is in fact equal to or more than 299.
-            	   	{
-            	   	    echo "&nbsp&nbsp<a href='index.php?pageid=".$nextpage."'>Next</a>";
-            	   	}
-            	?>
-            </div></div>
-<?php
-    	}
-    	else if($pageid==0)
-    	{
-    		if($noofbooks==300)   // If the no of books was in fact equal to 299 or more than it, i.e : 300.
-    		{
-    			$nextpage=$pageid+1;
-?>
-            <div align="center"><div>
-            	<?php
-            	    echo "<a href='index.php?pageid=".$nextpage."'>Next</a>";
-            	?>
-            </div></div>
-<?php
+      /* PAGINATION */
 
-    		}
-    	}
+      echo "<br><br><div class='pagination' align='center'>";
 
-?>
+      $range = 2;
 
-<?php
+      if($numrows>10)
+      {
+        if ($currentpage > 1) {
+           
+           echo "<a href='{$_SERVER['PHP_SELF']}?currentpage=1'><<</a> ";
+           
+           $prevpage = $currentpage - 1;
+           
+           echo "<a href='{$_SERVER['PHP_SELF']}?currentpage=$prevpage'><</a> ";
+        } 
+
+          
+        for ($x = ($currentpage - $range); $x < (($currentpage + $range) + 1); $x++) {
+        
+           if (($x > 0) && ($x <= $totalpages)) {
+        
+              if ($x == $currentpage) {
+          
+                 echo "<a class='active'>$x</a>";
+              
+              } else {
+                 
+                 echo "<a href='{$_SERVER['PHP_SELF']}?currentpage=$x'>$x</a> ";
+              } 
+           } 
+        } 
+                         
+        
+        if ($currentpage != $totalpages) {
+           
+           $nextpage = $currentpage + 1;
+            
+           echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$nextpage'>></a> ";
+           
+           echo " <a href='{$_SERVER['PHP_SELF']}?currentpage=$totalpages'>>></a> ";
+        } 
+      }
+      echo "</div>";
     }
 ?>
 </div>
